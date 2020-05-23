@@ -25,6 +25,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
+        http.formLogin()
+                .loginPage("/login")
+                .failureUrl("/login?error=true");
+
+        http.logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/")
+                .clearAuthentication(true)
+                .invalidateHttpSession(true);
+
         http.authorizeRequests()
                 .antMatchers("/create/theme", "/profile")
                 .authenticated();

@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "Themes")
+@Table(name = "themes")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

@@ -1,7 +1,6 @@
 use `forum`;
 
-
-CREATE TABLE `Themes` (
+CREATE TABLE `themes` (
                          `id` INT auto_increment NOT NULL,
                          `title` varchar(225) NOT NULL,
                          `text` varchar(500) NOT NULL,

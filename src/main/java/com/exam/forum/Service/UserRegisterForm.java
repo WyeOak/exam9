@@ -3,7 +3,9 @@ package com.exam.forum.Service;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Getter
 @Setter
@@ -24,6 +26,5 @@ public class UserRegisterForm {
     @Size(min=5, max=40, message = "password must contain > 5 and < 30 symbols")
     private String password = "";
 
-    @NotBlank
-    private String gender = "";
+
 }

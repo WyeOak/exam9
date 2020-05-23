@@ -1,0 +1,36 @@
+.jumbotron{
+    background: chartreuse;
+    color: white;
+}
+
+.tab-content{
+    border-left:  1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+}
+
+.nav-tabs{
+    margin-bottom: 0;
+}
+
+.main-table{
+    margin: 20px;
+    padding: 20px;
+}
+
+.main :hover{
+    background-color: midnightblue;
+    color:white;
+    cursor: pointer;
+}
+
+.theme_params{
+    margin: 0 30px;
+}
+
+.control_icons{
+    float:left;
+    display:inline;
+    width: 49%;
+}

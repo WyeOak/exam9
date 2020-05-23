@@ -1,6 +1,5 @@
 package com.exam.forum.Controller;
 
-
 import com.exam.forum.Exception.UserAlreadyRegisteredException;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;

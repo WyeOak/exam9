@@ -1,7 +1,6 @@
 use `forum`;
 
-
-CREATE TABLE `Comments` (
+CREATE TABLE `comments` (
                           `id` INT auto_increment NOT NULL,
                           `text` varchar(255) NOT NULL,
                           `user_id` INT NOT NULL,
@@ -10,4 +9,5 @@ CREATE TABLE `Comments` (
                           PRIMARY KEY (`id`),
                           CONSTRAINT `fk_comment_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
                           CONSTRAINT `fk_comment_theme` FOREIGN KEY (`theme_id`) REFERENCES `themes` (`id`)
+
 );

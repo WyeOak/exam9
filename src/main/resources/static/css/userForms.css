@@ -1,0 +1,21 @@
+.main-form {
+    width: 450px;
+    margin: 40px auto;
+}
+
+.error_messages{
+    color: darkred;
+    font-family: Arial, serif;
+    font-size: 13px;
+}
+
+.theme-form{
+    width: 800px;
+    margin: 40px auto;
+}
+
+.control_icons{
+    float:left;
+    display:inline;
+    width: 25%;
+}

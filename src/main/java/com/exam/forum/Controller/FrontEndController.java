@@ -2,7 +2,11 @@ package com.exam.forum.Controller;
 
 
 import com.exam.forum.Exception.UserAlreadyRegisteredException;
-import com.exam.forum.Service.*;
+import com.exam.forum.Service.UserRegisterForm;
+import com.exam.forum.Service.CommentService;
+import com.exam.forum.Service.PropertiesService;
+import com.exam.forum.Service.ThemeService;
+import com.exam.forum.Service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -47,6 +51,12 @@ public class FrontEndController {
         return "theme";
     }
 
+    @GetMapping("/create/theme")
+    public String createTheme(Model model){
+        model.addAttribute("user_status", getUserStatus());
+        return "createTheme";
+    }
+
     @GetMapping("/register")
     public String registerUserPage(Model model){
         model.addAttribute("user_status", getUserStatus());
@@ -57,20 +67,6 @@ public class FrontEndController {
         return "register";
     }
 
-    @PostMapping("/register")
-    public String registerUser(@Valid UserRegisterForm user, BindingResult validationResult, RedirectAttributes attributes){
-        if (validationResult.hasFieldErrors()) {
-            attributes.addFlashAttribute("errors", validationResult.getFieldErrors());
-            return "redirect:/register";
-        }
-        else{
-            if(userService.existByUsername(user)){
-                throw new UserAlreadyRegisteredException("User with this username is already registered! Please, try again.");
-            }
-            userService.register(user);
-            return "redirect:/login";
-        }
-    }
 
     @GetMapping("/login")
     public String loginPage(Model model){
@@ -94,6 +90,21 @@ public class FrontEndController {
             user_status = "authorizedUser";
         }
         return user_status;
+    }
+
+    @PostMapping("/register")
+    public String registerUser(@Valid UserRegisterForm user, BindingResult validationResult, RedirectAttributes attributes){
+        if (validationResult.hasFieldErrors()) {
+            attributes.addFlashAttribute("errors", validationResult.getFieldErrors());
+            return "redirect:/register";
+        }
+        else{
+            if(userService.existByUsername(user)){
+                throw new UserAlreadyRegisteredException("User with this username is already registered! Please, try again.");
+            }
+            userService.register(user);
+            return "redirect:/login";
+        }
     }
 
     private static <T> void constructPageable(Page<T> list, int pageSize, Model model, String uri) {

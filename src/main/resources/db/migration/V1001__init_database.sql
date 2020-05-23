@@ -1,7 +1,6 @@
 use `forum`;
 
-
-CREATE TABLE `Users` (
+CREATE TABLE `users` (
                        `id` INT auto_increment NOT NULL,
                        `first_name` varchar(128) NOT NULL,
                        `last_name` varchar(128) NOT NULL,

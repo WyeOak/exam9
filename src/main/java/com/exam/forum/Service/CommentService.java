@@ -1,8 +1,9 @@
 package com.exam.forum.Service;
 
-
+import com.exam.forum.Model.Comment;
 import com.exam.forum.DTO.CommentDto;
 import com.exam.forum.Repository.CommentRepository;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -17,5 +18,9 @@ public class CommentService {
 
     public Page<CommentDto> getComments(Integer theme_id, Pageable pageable){
         return commentRepository.findAllByThemeId(theme_id, pageable).map(CommentDto::from);
+    }
+
+    public void saveComment(Comment comment){
+        commentRepository.save(comment);
     }
 }
