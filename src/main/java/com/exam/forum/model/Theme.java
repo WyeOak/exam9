@@ -1,6 +1,7 @@
-package com.exam.forum.Model;
+package com.exam.forum.model;
 
 
+import com.exam.forum.util.Generator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,6 +12,7 @@ import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
+import java.util.Random;
 import java.util.UUID;
 
 @Data
@@ -30,4 +32,20 @@ public class Theme {
     private User user;
     private LocalDateTime time;
     @Builder.Default
-    private int comments = 0;}
+    private int comments = 0;
+
+    public static Theme make(User u) {
+        Random r = new Random();
+        return builder()
+                .theme(Generator.makePassword() + " " + Generator.makeName())
+                .description(Generator.makeDescription())
+                .user(u)
+                .time(LocalDateTime.now().minusDays(r.nextInt(20) + 1))
+                .build();
+    }
+    public void plusComment() {
+        this.comments++;
+    }
+
+
+}

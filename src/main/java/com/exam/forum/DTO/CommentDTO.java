@@ -1,7 +1,7 @@
 package com.exam.forum.DTO;
 
 
-import com.exam.forum.Model.Comment;
+import com.exam.forum.model.Comment;
 import lombok.Builder;
 import lombok.Data;
 

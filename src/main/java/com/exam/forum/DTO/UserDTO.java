@@ -1,6 +1,7 @@
 package com.exam.forum.DTO;
 
-import com.exam.forum.Model.User;
+
+import com.exam.forum.model.User;
 import lombok.*;
 
 @Getter @Setter @ToString

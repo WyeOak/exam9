@@ -1,6 +1,6 @@
 package com.exam.forum.DTO;
 
-import com.exam.forum.Model.Theme;
+import com.exam.forum.model.Theme;
 import lombok.Builder;
 import lombok.Data;
 

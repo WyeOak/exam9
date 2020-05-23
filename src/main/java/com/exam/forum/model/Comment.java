@@ -1,5 +1,7 @@
-package com.exam.forum.Model;
+package com.exam.forum.model;
 
+
+import com.exam.forum.util.Generator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,9 +12,11 @@ import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
+import java.util.Random;
 import java.util.UUID;
+
 @Data
-@Document(collection = "comments")
+@Document(collection = "Comments")
 @AllArgsConstructor
 @Builder
 public class Comment {
@@ -27,4 +31,15 @@ public class Comment {
     private User user;
     @Indexed
     @DBRef
-    private Theme theme;}
+    private Theme theme;
+
+    public static Comment make(User u, Theme t) {
+        Random r = new Random();
+        return builder()
+                .comment(Generator.makeDescription())
+                .user(u)
+                .theme(t)
+                .time(LocalDateTime.now().minusDays(r.nextInt(20) + 1))
+                .build();
+    }
+}

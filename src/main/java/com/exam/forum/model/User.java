@@ -1,17 +1,21 @@
-package com.exam.forum.Model;
+package com.exam.forum.model;
 
 
+import com.exam.forum.util.Generator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -29,15 +33,23 @@ public class User implements UserDetails {
     @NotBlank
     private String login;
     @NotNull
-    @Email(message = "example@gmail.com")
+    @Email(message = "example@example.com")
     private String email;
-    @NotBlank @Min(8)
+    @NotBlank @Min(4)
     private String password;
     @Builder.Default
     private boolean enabled = true;
     @Builder.Default
     private String role = "USER";
     private int comments;
+
+    public static User make() {
+        return User.builder()
+                .login(Generator.makeName().toLowerCase())
+                .email(Generator.makeEmail())
+                .password(new BCryptPasswordEncoder().encode(Generator.makePassword()))
+                .build();
+    }
 
     public void plusComment() {
         this.comments++;
@@ -46,6 +58,11 @@ public class User implements UserDetails {
         this.comments--;
     }
 
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(this.role));
+    }
 
     @Override
     public String getUsername() {
@@ -66,8 +83,4 @@ public class User implements UserDetails {
     public boolean isCredentialsNonExpired() {
         return true;
     }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(this.role));
-    }}
+}
